@@ -19,10 +19,8 @@ public class BroadphaseSystem : ComponentSystem
 
     [Inject] private Data m_Data;
 
-    private EntityManager _entityManager;
     public BroadphaseSystem()
     {
-        this._entityManager = World.Active.GetExistingManager<EntityManager>();
     }
 
     private bool checkAABB(AABBComponent a, AABBComponent b)

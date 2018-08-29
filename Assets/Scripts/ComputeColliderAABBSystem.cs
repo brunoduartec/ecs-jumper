@@ -2,11 +2,12 @@
 using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
+using Unity.Jobs;
 
 using Unity.Mathematics;
 
 
-public class ComputeColliderAABBSystem : ComponentSystem
+public class ComputeColliderAABBSystem : JobComponentSystem
 {
     public struct Data
     {
@@ -17,11 +18,12 @@ public class ComputeColliderAABBSystem : ComponentSystem
 
     [Inject] private Data m_Data;
 
-    protected override void OnUpdate()
+    public struct Job : IJobParallelFor
     {
-        for (int index = 0; index < m_Data.Length; ++index)
+        public Data data;
+        public void Execute(int index)
         {
-            var position = m_Data.Position[index].Value;
+            var position = data.Position[index].Value;
             float size = 2.5f;
 
             AABBComponent aabb = new AABBComponent
@@ -29,7 +31,16 @@ public class ComputeColliderAABBSystem : ComponentSystem
                 center = position,
                 halfwidths = new float3(size, size, size)
             };
-            m_Data.AABB[index] = aabb;
+            data.AABB[index] = aabb;
         }
+    }
+
+    protected override JobHandle OnUpdate(JobHandle inputDeps)
+    {
+        Job job = new Job()
+        {
+            data = m_Data
+        };
+        return job.Schedule(m_Data.Length, 64, inputDeps);
     }
 }

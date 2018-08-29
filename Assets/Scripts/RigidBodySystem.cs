@@ -22,22 +22,24 @@ public class RidigBodySystem : ComponentSystem
 
     protected override void OnUpdate()
     {
-        float3 gravity = new float3(0, -20, 0);
         float dt = Time.deltaTime;
         for (int index = 0; index < m_Data.Length; ++index)
         {
+            float3 gravity = new float3(0, -20, 0);
+
             var position = m_Data.Position[index].Value;
-
-            if (m_Data.Collision[index].Value == 0)
+            if (m_Data.Collision[index].Value > 0)
             {
-                Velocity velocity = new Velocity
-                {
-                    Value = m_Data.Velocity[index].Value + gravity * dt
-                };
-                m_Data.Velocity[index] = velocity;
-
-                position += (m_Data.Velocity[index].Value * dt + 0.5f * gravity * dt * dt);
+                gravity = float3.zero;
             }
+
+            Velocity velocity = new Velocity
+            {
+                Value = m_Data.Velocity[index].Value + gravity * dt
+            };
+            m_Data.Velocity[index] = velocity;
+
+            position += (m_Data.Velocity[index].Value * dt + 0.5f * gravity * dt * dt);
 
             m_Data.Position[index] = new Position { Value = position };
         }

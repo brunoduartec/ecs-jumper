@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.Entities;
 using Unity.Rendering;
 using Unity.Transforms;
+
 using UnityEngine;
 
 
@@ -26,6 +27,7 @@ public sealed class ArchetypeFactory
         var playerArchetype = this._entityManager.CreateArchetype(
             typeof(Transform),
             typeof(Position),
+            typeof(Heading),
             typeof(Velocity),
             typeof(Player),
             typeof(RigidBodyComponent),

@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
 using System.Runtime.InteropServices;
 
 using Unity.Entities;
@@ -8,13 +10,11 @@ using Unity.Mathematics;
 
 public class LevelGenerator
 {
-    public int minX, maxX, minY, maxY, maxHeight;
+    public int minX, maxX, minY, maxY, maxDistanceBetweenRows, size;
 
     public int blockSize = 1;
 
-    private EntityManager _entityManager;
-
-    public LevelGenerator(int minX, int maxX, int minY, int maxY, int maxHeight)
+    public LevelGenerator(int minX, int maxX, int minY, int maxY, int maxDistanceBetweenRows, int blockSize, int size)
     {
         this.minX = minX;
         this.maxX = maxX;
@@ -22,77 +22,48 @@ public class LevelGenerator
         this.minY = minY;
         this.maxY = maxY;
 
-        this.maxHeight = maxHeight;
+        this.size = size;
 
-        this._entityManager = World.Active.GetExistingManager<EntityManager>();
+        this.maxDistanceBetweenRows = maxDistanceBetweenRows;
+        this.blockSize = blockSize;
     }
 
-    private void addBlock(float3 blockPosition)
+    public List<float3> buildLevel()
     {
-        Entity block = EntityFactory.Instance.createEntityByName("block");
-        this._entityManager.SetComponentData(block, new Position { Value = blockPosition });
-    }
+        List<float3> level = new List<float3>();
 
-    public void buildLevel()
-    {
-        int size = 6;
-        for (int i = 0; i < maxX; i++)
+        int vectorSize = (maxX - minX) / size;
+        int[] possibilityVector = new int[vectorSize];
+
+        for (int i = 0; i < vectorSize; i++)
         {
-            addBlock(new float3(i * size, i * size, 0));
+            possibilityVector[i] = 0;
         }
 
-        // int vectorSize = maxX - minX;
-        // int[] possibilityVector = new int[vectorSize];
+        int currentY = minY;
 
-        // for (int i = 0; i < vectorSize; i++)
-        // {
-        //     possibilityVector[i] = 0;
-        // }
+        while (currentY < maxY)
+        {
+            currentY += maxDistanceBetweenRows;
 
-        // int currentY = minY;
+            int currentX = 0;
 
-        // bool checkLineSanity = true;
+            while (currentX < maxX)
+            {
+                bool canInsertBlock = (UnityEngine.Random.Range(0, 10.0f) > 5) && (currentX + blockSize * size < maxX);
+                if (canInsertBlock)
+                {
+                    for (int i = 0; i < blockSize; i++)
+                    {
+                        float3 blockPosition = new float3(minX + size * currentX, minY + size * currentY, 0);
+                        level.Add(blockPosition);
+                        currentX += 1;
+                    }
+                }
+                currentX += 1;
+            }
 
-        // while (currentY < maxY)
-        // {
-        //     int height = maxHeight;//Random.Range(1, maxHeight);
-
-        //     if (checkLineSanity)
-        //     {
-        //         currentY += height;
-        //         checkLineSanity = false;
-        //     }
-        //     for (int i = 0; i < possibilityVector.Length; i = i + blockSize)
-        //     {
-        //         if (possibilityVector[i] > 0)
-        //         {
-        //             int subtractor = height > 0 ? (height - 1) : 1;
-
-        //             for (int j = 0; j < blockSize; j++)
-        //             {
-        //                 possibilityVector[i + j] -= subtractor;
-        //             }
-        //         }
-        //         else
-        //         {
-        //             bool chance = (UnityEngine.Random.value > 0.5f);
-
-        //             if (chance)
-        //             {
-        //                 for (int j = 0; j < blockSize; j++)
-        //                 {
-        //                     possibilityVector[i] = maxHeight;
-
-        //                     float3 blockPosition = new float3((float)(minX + i + j), (float)(currentY), 0.0f);
-
-        //                     addBlock(blockPosition);
-        //                 }
-
-        //                 checkLineSanity = true;
-        //             }
-        //         }
-        //     }
-        // }
-
+        }
+        return level;
     }
 }

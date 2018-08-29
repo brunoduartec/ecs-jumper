@@ -13,6 +13,12 @@ public struct Velocity : IComponentData
 {
     public float3 Value;
 }
+
+public struct Heading : IComponentData
+{
+    public float3 Value;
+}
+
 public struct RigidBodyComponent : IComponentData
 {
     public float Mass;
