@@ -6,15 +6,16 @@ using Unity.Collections;
 
 using System.Collections.Generic;
 
+using Unity.Transforms;
+
 public struct Player : IComponentData { }
 public struct Block : IComponentData { }
 
-public struct Velocity : IComponentData
+public struct PlayerInput : IComponentData
 {
-    public float3 Value;
+    public float FireCooldown;
 }
-
-public struct Heading : IComponentData
+public struct Velocity : IComponentData
 {
     public float3 Value;
 }
