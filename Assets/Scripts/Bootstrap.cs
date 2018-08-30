@@ -25,8 +25,6 @@ public class Bootstrap : MonoBehaviour
 
         Entity player = EntityFactory.Instance.createEntityByName("player");
         entityManager.SetComponentData(player, new Position { Value = new float3(constants.playerInitX, constants.playerInitY, 0.0f) });
-        entityManager.SetComponentData(player, new Heading { Value = new float3(1, 0, 0) });
-
 
         LevelGenerator generator = new LevelGenerator(
             constants.minX,
@@ -44,8 +42,6 @@ public class Bootstrap : MonoBehaviour
             Entity block = EntityFactory.Instance.createEntityByName("block");
             entityManager.SetComponentData(block, new Position { Value = blockPosition });
         }
-
-
     }
 
     // Update is called once per frame
