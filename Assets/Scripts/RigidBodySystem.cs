@@ -12,8 +12,10 @@ public class RidigBodySystem : ComponentSystem
     {
         public readonly int Length;
         public ComponentDataArray<Position> Position;
+        public ComponentDataArray<Rotation> Rotation;
         public ComponentDataArray<CollisionComponent> Collision;
         public ComponentDataArray<RigidBodyComponent> RigidBody;
+
 
         public ComponentDataArray<Velocity> Velocity;
     }
