@@ -25,9 +25,9 @@ public sealed class ArchetypeFactory
     {
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
         var playerArchetype = this._entityManager.CreateArchetype(
-            typeof(Transform),
             typeof(Position),
-            typeof(Heading),
+            typeof(Rotation),
+            typeof(PlayerInput),
             typeof(Velocity),
             typeof(Player),
             typeof(RigidBodyComponent),
@@ -39,8 +39,8 @@ public sealed class ArchetypeFactory
         this.archetypes.Add("player", playerArchetype);
 
         var blockArchetype = this._entityManager.CreateArchetype(
-            typeof(Transform),
             typeof(Position),
+            typeof(Rotation),
             typeof(Block),
             typeof(AABBComponent),
             typeof(CollisionComponent),
