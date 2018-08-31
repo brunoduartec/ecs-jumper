@@ -15,6 +15,7 @@ public class AutoJumpSystem : JobComponentSystem
     {
         public readonly int Length;
         public ComponentDataArray<Player> Player;
+        public ComponentDataArray<Position> Position;
         public ComponentDataArray<PlayerInput> PlayerInput;
         public ComponentDataArray<Velocity> Velocity;
         public ComponentDataArray<CollisionComponent> CollisionComponent;
@@ -22,9 +23,18 @@ public class AutoJumpSystem : JobComponentSystem
 
     [Inject] private Data m_Data;
 
+    public struct ScoreData
+    {
+        public readonly int Length;
+        public ComponentDataArray<MaxHeight> MaxHeight;
+    }
+
+    [Inject] private ScoreData m_Score;
+
     public struct Job : IJobParallelFor
     {
         public Data data;
+        public ScoreData score;
         public void Execute(int index)
         {
             if (data.CollisionComponent[index].Value > 0)
@@ -33,13 +43,22 @@ public class AutoJumpSystem : JobComponentSystem
 
                 data.Velocity[index] = new Velocity { Value = velocity };
             }
+
+            if (data.Position[index].Value.y > score.MaxHeight[0].Value)
+            {
+                score.MaxHeight[0] = new MaxHeight
+                {
+                    Value = data.Position[index].Value.y
+                };
+            }
         }
     }
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
         Job job = new Job()
         {
-            data = m_Data
+            data = m_Data,
+            score = m_Score
         };
         return job.Schedule(m_Data.Length, 64, inputDeps);
     }
