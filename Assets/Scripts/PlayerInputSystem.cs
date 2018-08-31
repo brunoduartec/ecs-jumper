@@ -13,16 +13,15 @@ public class PlayerInputSystem : ComponentSystem
         public readonly int Length;
 
         public ComponentDataArray<PlayerInput> PlayerInput;
-        public ComponentDataArray<Rotation> Rotation;
     }
 
-    [Inject] private PlayerData m_Players;
+    [Inject] private PlayerData m_Data;
 
     protected override void OnUpdate()
     {
         float dt = Time.deltaTime;
 
-        for (int i = 0; i < m_Players.Length; ++i)
+        for (int i = 0; i < m_Data.Length; ++i)
         {
             UpdatePlayerInput(i, dt);
         }
@@ -30,17 +29,13 @@ public class PlayerInputSystem : ComponentSystem
 
     private void UpdatePlayerInput(int i, float dt)
     {
-        // Touch touch = Input.touches[0];
+        float dirX = Input.acceleration.x;
 
-        float y = Input.acceleration.y;
+        float xDirection = dirX > 0 ? 1 : -1;
 
-        float xDirection = y > 0 ? 1 : 0;
-
-        Vector3 direction = new Vector3(xDirection, 0, 0);
-
-        m_Players.Rotation[i] = new Rotation
+        m_Data.PlayerInput[i] = new PlayerInput
         {
-            Value = Quaternion.LookRotation(direction, Vector3.up)
+            Direction = xDirection
         };
     }
 }
