@@ -14,6 +14,7 @@ public struct Block : IComponentData { }
 public struct PlayerInput : IComponentData
 {
     public float FireCooldown;
+    public float Direction;
 }
 public struct Velocity : IComponentData
 {
