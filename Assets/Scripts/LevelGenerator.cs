@@ -32,21 +32,13 @@ public class LevelGenerator
     {
         List<float3> level = new List<float3>();
 
-        int vectorSize = (maxX - minX) / size;
-        int[] possibilityVector = new int[vectorSize];
-
-        for (int i = 0; i < vectorSize; i++)
-        {
-            possibilityVector[i] = 0;
-        }
-
         int currentY = minY;
 
         while (currentY < maxY)
         {
-            currentY += maxDistanceBetweenRows;
+            currentY += (maxDistanceBetweenRows * size);
 
-            int currentX = 0;
+            int currentX = minX;
 
             while (currentX < maxX)
             {
@@ -55,12 +47,12 @@ public class LevelGenerator
                 {
                     for (int i = 0; i < blockSize; i++)
                     {
-                        float3 blockPosition = new float3(minX + size * currentX, minY + size * currentY, 0);
+                        float3 blockPosition = new float3(currentX, currentY, 0);
                         level.Add(blockPosition);
-                        currentX += 1;
+                        currentX += size;
                     }
                 }
-                currentX += 1;
+                currentX += size;
             }
 
         }
