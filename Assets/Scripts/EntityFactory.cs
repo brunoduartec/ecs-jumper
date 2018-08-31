@@ -28,6 +28,7 @@ public sealed class EntityFactory
     {
         this.entities.Add("player", new Delegate1(CreatePlayer));
         this.entities.Add("block", new Delegate1(CreateBlock));
+        this.entities.Add("score", new Delegate1(CreateScore));
     }
 
     private Entity CreatePlayer()
@@ -48,6 +49,15 @@ public sealed class EntityFactory
         this._entityManager.SetSharedComponentData(blockEntity, GetLookFromPrototype("BlockRenderPrototype"));
 
         return blockEntity;
+    }
+
+    private Entity CreateScore()
+    {
+        this._entityManager = World.Active.GetExistingManager<EntityManager>();
+
+        var scoreEntity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("score"));
+
+        return scoreEntity;
     }
 
     public static EntityFactory Instance

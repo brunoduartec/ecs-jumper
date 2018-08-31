@@ -49,7 +49,11 @@ public sealed class ArchetypeFactory
 
         this.archetypes.Add("block", blockArchetype);
 
-
+        var scoreArchetype = this._entityManager.CreateArchetype(
+            typeof(Points),
+            typeof(MaxHeight)
+        );
+        this.archetypes.Add("score", scoreArchetype);
     }
 
     public static ArchetypeFactory Instance

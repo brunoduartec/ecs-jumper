@@ -38,3 +38,14 @@ public struct CollisionComponent : IComponentData
 {
     public float Value;
 }
+
+
+public struct MaxHeight : IComponentData
+{
+    public float Value;
+}
+
+public struct Points : IComponentData
+{
+    public float Value;
+}
