@@ -1,17 +1,11 @@
 using Unity.Entities;
 using UnityEngine;
 
-using Unity.Transforms;
-
-using System.Collections;
-
-
 public class PlayerInputSystem : ComponentSystem
 {
     struct PlayerData
     {
         public readonly int Length;
-
         public ComponentDataArray<PlayerInput> PlayerInput;
     }
 
@@ -39,4 +33,3 @@ public class PlayerInputSystem : ComponentSystem
         };
     }
 }
-

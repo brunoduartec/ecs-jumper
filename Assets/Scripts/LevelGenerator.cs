@@ -28,7 +28,7 @@ public class LevelGenerator
         this.blockSize = blockSize;
     }
 
-    public List<float3> buildLevel()
+    public List<float3> buildBlocks()
     {
         List<float3> level = new List<float3>();
 

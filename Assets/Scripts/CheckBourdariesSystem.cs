@@ -54,24 +54,6 @@ public class CheckBourdaries : ComponentSystem
                 };
                 m_Data.Position[index] = newPosition;
             }
-            if (m_Data.Position[index].Value.y < _constants.minY)
-            {
-                float3 currentPosition = m_Data.Position[index].Value;
-
-                Position newPosition = new Position
-                {
-                    Value = new float3(
-                        (float)_constants.playerInitX,
-                        (float)_constants.playerInitY,
-                        currentPosition.z)
-                };
-                m_Data.Position[index] = newPosition;
-                m_Data.Velocity[index] = new Velocity
-                {
-                    Value = float3.zero
-                };
-            }
-
         }
     }
 }

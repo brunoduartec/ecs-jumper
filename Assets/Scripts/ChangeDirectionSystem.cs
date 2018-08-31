@@ -2,7 +2,6 @@
 using UnityEngine;
 using Unity.Entities;
 using Unity.Transforms;
-using Unity.Collections;
 using Unity.Mathematics;
 
 public class ChangeDirectionSystem : ComponentSystem

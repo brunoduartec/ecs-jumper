@@ -14,6 +14,6 @@ public class GameConstants : MonoBehaviour
     public int jumpVelocityY;
     public int jumpVelocityX;
 
-    public int playerInitX;
-    public int playerInitY;
+    public int heightToRespawn;
+
 }
