@@ -323,4 +323,5 @@
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/PlayerInputSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/RigidBodySystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/UpdateHudSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/UpdateScoreSystem.cs
 -v:0
