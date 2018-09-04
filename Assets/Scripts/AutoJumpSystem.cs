@@ -37,19 +37,11 @@ public class AutoJumpSystem : JobComponentSystem
         public ScoreData score;
         public void Execute(int index)
         {
-            if (data.CollisionComponent[index].Value > 0)
+            if (data.CollisionComponent[index].Value > 0 && data.Velocity[index].Value.y < 0)
             {
                 float3 velocity = new float3(0, 30, 0);
 
                 data.Velocity[index] = new Velocity { Value = velocity };
-            }
-
-            if (data.Position[index].Value.y > score.MaxHeight[0].Value)
-            {
-                score.MaxHeight[0] = new MaxHeight
-                {
-                    Value = data.Position[index].Value.y
-                };
             }
         }
     }
