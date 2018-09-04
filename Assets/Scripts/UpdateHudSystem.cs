@@ -11,7 +11,6 @@ public class UpdateHudSystem : ComponentSystem
     public struct PlayerData
     {
         public readonly int Length;
-        [ReadOnly] public EntityArray Entity;
         [ReadOnly] public ComponentDataArray<Player> Player;
     }
 
