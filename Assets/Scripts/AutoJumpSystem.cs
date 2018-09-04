@@ -16,7 +16,6 @@ public class AutoJumpSystem : JobComponentSystem
         public readonly int Length;
         public ComponentDataArray<Player> Player;
         public ComponentDataArray<Position> Position;
-        public ComponentDataArray<PlayerInput> PlayerInput;
         public ComponentDataArray<Velocity> Velocity;
         public ComponentDataArray<CollisionComponent> CollisionComponent;
     }

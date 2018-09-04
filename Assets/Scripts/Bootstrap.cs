@@ -26,7 +26,7 @@ public class Bootstrap : MonoBehaviour
         World.Active.GetOrCreateManager<UpdateHudSystem>().SetupGameObjects();
 
         Entity player = EntityFactory.Instance.createEntityByName("player");
-        entityManager.SetComponentData(player, new Position { Value = new float3(0, constants.minY + constants.blockSize, 0.0f) });
+        entityManager.SetComponentData(player, new Position { Value = new float3(0, constants.minY + constants.blockSize * 2, 0.0f) });
 
         LevelGenerator generator = new LevelGenerator(
             constants.minX,
