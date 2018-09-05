@@ -16,7 +16,7 @@ public class GameConstants : MonoBehaviour
 
     public float heightToRespawn;
 
-    public int breakTimeInSeconds;
+    public float breakTimeInSeconds;
 
     public int gravity;
 

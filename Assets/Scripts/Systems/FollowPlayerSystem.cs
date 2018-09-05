@@ -29,7 +29,7 @@ public class FollowPlayerSystem : ComponentSystem
 
             if (cam)
             {
-                cam.transform.position = new Vector3(cam.transform.position.x, m_Data.Position[index].Value.y + 40, cam.transform.position.z);
+                cam.transform.position = new Vector3(cam.transform.position.x, m_Data.Position[index].Value.y + 20, cam.transform.position.z);
             }
 
         }

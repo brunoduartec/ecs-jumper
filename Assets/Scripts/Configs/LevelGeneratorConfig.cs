@@ -30,8 +30,8 @@ public static class LevelGeneratorConfig
     {
         List<ItemProperty> itemProperties = new List<ItemProperty>();
 
-        itemProperties.Add(new ItemProperty("block", ITEMTYPE.SOLID, .4f));
-        itemProperties.Add(new ItemProperty("breakeable", ITEMTYPE.BREAKEABLE, .5f));
+        itemProperties.Add(new ItemProperty("block", ITEMTYPE.SOLID, .8f));
+        itemProperties.Add(new ItemProperty("breakeable", ITEMTYPE.BREAKEABLE, .1f));
 
         return itemProperties;
     }

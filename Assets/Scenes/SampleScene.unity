@@ -642,9 +642,9 @@ MonoBehaviour:
   blocksTogether: 2
   distanceHeightBetweenRows: 5
   jumpVelocityY: 50
-  jumpVelocityX: 1
+  jumpVelocityX: 0.4
   heightToRespawn: 150
-  breakTimeInSeconds: 1
+  breakTimeInSeconds: 0.2
   gravity: 40
 --- !u!1 &1633198636
 GameObject:

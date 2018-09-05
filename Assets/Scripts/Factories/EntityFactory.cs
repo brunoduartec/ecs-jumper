@@ -70,7 +70,7 @@ public sealed class EntityFactory
 
         this._entityManager.SetComponentData(entity, new BreakComponent
         {
-            coolDown = 3,
+            coolDown = this._constants.breakTimeInSeconds,
             started = 0
         });
 
