@@ -32,6 +32,7 @@ public static class LevelGeneratorConfig
 
         itemProperties.Add(new ItemProperty("block", ITEMTYPE.SOLID, .8f));
         itemProperties.Add(new ItemProperty("breakeable", ITEMTYPE.BREAKEABLE, .1f));
+        itemProperties.Add(new ItemProperty("zigzag", ITEMTYPE.MOVEABLE, .8f));
 
         return itemProperties;
     }

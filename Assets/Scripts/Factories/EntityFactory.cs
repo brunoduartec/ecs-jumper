@@ -35,6 +35,7 @@ public sealed class EntityFactory
         this.entities.Add("block", new Delegate1(CreateBlock));
         this.entities.Add("breakeable", new Delegate1(CreateBreakeable));
         this.entities.Add("score", new Delegate1(CreateScore));
+        this.entities.Add("zigzag", new Delegate1(CreateZigZag));
     }
 
     private Entity CreatePlayer()
@@ -75,6 +76,27 @@ public sealed class EntityFactory
         });
 
         MeshInstanceRenderer renderer = GetLookFromPrototype("BreakeableRenderPrototype");
+        this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
+        this._entityManager.SetSharedComponentData(entity, renderer);
+
+        return entity;
+    }
+
+    private Entity CreateZigZag()
+    {
+        this._entityManager = World.Active.GetExistingManager<EntityManager>();
+
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("zigzag"));
+
+        this._entityManager.SetComponentData(entity, new ZigZagMoveable
+        {
+            Amplitude = this._constants.MoveableBlockAmplitude * this._constants.blockSize,
+            Speed = this._constants.MoveableBlockSpeed,
+            CurrentPosition = 0,
+            Direction = 1
+        });
+
+        MeshInstanceRenderer renderer = GetLookFromPrototype("ZigZagRenderPrototype");
         this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
         this._entityManager.SetSharedComponentData(entity, renderer);
 

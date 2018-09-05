@@ -20,6 +20,15 @@ public struct BreakComponent : IComponentData
     public float started;
 }
 
+public struct ZigZagMoveable : IComponentData
+{
+    public float Amplitude;
+    public float CurrentPosition;
+    public float Speed;
+
+    public float Direction;
+}
+
 public struct PlayerInput : IComponentData
 {
     public float FireCooldown;

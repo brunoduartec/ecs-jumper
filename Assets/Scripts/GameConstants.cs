@@ -20,4 +20,7 @@ public class GameConstants : MonoBehaviour
 
     public int gravity;
 
+    public int MoveableBlockAmplitude;
+    public int MoveableBlockSpeed;
+
 }

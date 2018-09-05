@@ -326,4 +326,5 @@
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/RigidBodySystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateHudSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateScoreSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ZigZagSystem.cs
 -v:0
