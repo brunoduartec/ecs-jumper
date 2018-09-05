@@ -18,10 +18,6 @@ public class ChangeDirectionSystem : ComponentSystem
 
     [Inject] private Data m_Data;
 
-    public ChangeDirectionSystem()
-    {
-
-    }
     protected override void OnUpdate()
     {
         for (int index = 0; index < m_Data.Length; ++index)
@@ -30,9 +26,11 @@ public class ChangeDirectionSystem : ComponentSystem
 
             Velocity currentVelocity = m_Data.Velocity[index];
 
+
+
             m_Data.Velocity[index] = new Velocity
             {
-                Value = currentVelocity.Value + 0.5f * (new float3(directionX, 0, 0))
+                Value = currentVelocity.Value + m_Data.PlayerInput[index].Intensity * (new float3(directionX, 0, 0))
             };
 
             Vector3 rotationDirection = new Vector3(0, 0, -directionX);

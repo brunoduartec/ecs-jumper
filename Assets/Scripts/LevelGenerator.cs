@@ -10,11 +10,12 @@ using Unity.Mathematics;
 
 public class LevelGenerator
 {
-    public int minX, maxX, minY, maxY, maxDistanceBetweenRows, size;
+    public int minX, maxX, minY, maxY, maxDistanceBetweenRows, size, maxItemsByColumn;
 
-    public int blockSize = 1;
+    private List<LevelGeneratorConfig.ItemProperty> itemProperties;
+    public int itemSize = 1;
 
-    public LevelGenerator(int minX, int maxX, int minY, int maxY, int maxDistanceBetweenRows, int blockSize, int size)
+    public LevelGenerator(int minX, int maxX, int minY, int maxY, int maxDistanceBetweenRows, int maxItemsByColumn, int itemSize, int size)
     {
         this.minX = minX;
         this.maxX = maxX;
@@ -24,31 +25,69 @@ public class LevelGenerator
 
         this.size = size;
 
+        this.maxItemsByColumn = maxItemsByColumn;
+
         this.maxDistanceBetweenRows = maxDistanceBetweenRows;
-        this.blockSize = blockSize;
+        this.itemSize = itemSize;
+
+        this.itemProperties = LevelGeneratorConfig.getItemProperties();
+
+        this.itemProperties.Sort(delegate (LevelGeneratorConfig.ItemProperty x, LevelGeneratorConfig.ItemProperty y)
+        {
+            return x.probability.CompareTo(y.probability);
+        });
     }
 
-    public List<float3> buildBlocks()
+    public struct Item
     {
-        List<float3> level = new List<float3>();
+        public float3 position;
+        public LevelGeneratorConfig.ItemProperty itemProperty;
+    };
+
+    public LevelGeneratorConfig.ItemProperty getItem()
+    {
+        foreach (LevelGeneratorConfig.ItemProperty item in itemProperties)
+        {
+            int probability = (int)(100 * item.probability);
+            int prob = UnityEngine.Random.Range(0, 100);
+            if (prob <= probability)
+                return item;
+        }
+
+        return itemProperties[0];
+    }
+
+
+    public List<Item> buildItems()
+    {
+        List<Item> items = new List<Item>();
 
         int currentY = minY;
 
         while (currentY < maxY)
         {
-            currentY += (maxDistanceBetweenRows * size);
+            int distance = UnityEngine.Random.Range(2, this.maxDistanceBetweenRows);
+            currentY += (distance * size);
 
             int currentX = minX;
 
-            while (currentX < maxX)
+            int itemsPlaced = 0;
+
+            while (currentX < maxX && itemsPlaced < this.maxItemsByColumn)
             {
-                bool canInsertBlock = (UnityEngine.Random.Range(0, 10.0f) > 5) && (currentX + blockSize * size < maxX);
+                bool canInsertBlock = (UnityEngine.Random.Range(0, 10.0f) > 5) && (currentX + itemSize * size < maxX);
                 if (canInsertBlock)
                 {
-                    for (int i = 0; i < blockSize; i++)
+                    LevelGeneratorConfig.ItemProperty itemProperty = getItem();
+                    for (int i = 0; i < itemSize; i++)
                     {
-                        float3 blockPosition = new float3(currentX, currentY, 0);
-                        level.Add(blockPosition);
+                        float3 position = new float3(currentX, currentY, 0);
+                        Item item = new Item();
+                        item.itemProperty = itemProperty;
+                        item.position = position;
+
+                        items.Add(item);
+                        itemsPlaced++;
                         currentX += size;
                     }
                 }
@@ -56,6 +95,6 @@ public class LevelGenerator
             }
 
         }
-        return level;
+        return items;
     }
 }

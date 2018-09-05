@@ -11,9 +11,13 @@ public class GameConstants : MonoBehaviour
     public int blockSize;
     public int blocksTogether;
     public int distanceHeightBetweenRows;
-    public int jumpVelocityY;
-    public int jumpVelocityX;
+    public float jumpVelocityY;
+    public float jumpVelocityX;
 
-    public int heightToRespawn;
+    public float heightToRespawn;
+
+    public int breakTimeInSeconds;
+
+    public int gravity;
 
 }

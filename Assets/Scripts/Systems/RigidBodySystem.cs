@@ -22,15 +22,18 @@ public class RidigBodySystem : ComponentSystem
 
     [Inject] private Data m_Data;
 
+    private GameConstants _constants;
+
+
     protected override void OnUpdate()
     {
         float dt = Time.deltaTime;
         for (int index = 0; index < m_Data.Length; ++index)
         {
-            float3 gravity = new float3(0, -20, 0);
+            float3 gravity = new float3(0, -60, 0);
 
             var position = m_Data.Position[index].Value;
-            if (m_Data.Collision[index].Value > 0)
+            if (m_Data.Collision[index].direction.y > 0)
             {
                 gravity = float3.zero;
             }

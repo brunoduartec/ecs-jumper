@@ -17,6 +17,7 @@ public class AutoJumpSystem : JobComponentSystem
         public ComponentDataArray<Player> Player;
         public ComponentDataArray<Position> Position;
         public ComponentDataArray<Velocity> Velocity;
+        public ComponentDataArray<Jump> Jump;
         public ComponentDataArray<CollisionComponent> CollisionComponent;
     }
 
@@ -34,13 +35,19 @@ public class AutoJumpSystem : JobComponentSystem
     {
         public Data data;
         public ScoreData score;
+
         public void Execute(int index)
         {
-            if (data.CollisionComponent[index].Value > 0 && data.Velocity[index].Value.y < 0)
+            if (data.Velocity[index].Value.y < 0)
             {
-                float3 velocity = new float3(0, 30, 0);
+                if (data.CollisionComponent[index].direction.y < 0)
+                {
+                    float jumpVelocityY = data.Jump[index].Value;
+                    float3 velocity = new float3(0, jumpVelocityY, 0);
 
-                data.Velocity[index] = new Velocity { Value = velocity };
+                    data.Velocity[index] = new Velocity { Value = velocity };
+                }
+
             }
         }
     }

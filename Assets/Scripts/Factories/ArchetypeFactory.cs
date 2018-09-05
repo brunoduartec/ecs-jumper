@@ -28,10 +28,12 @@ public sealed class ArchetypeFactory
             typeof(Position),
             typeof(Rotation),
             typeof(PlayerInput),
+            typeof(Jump),
             typeof(Velocity),
             typeof(Player),
             typeof(RigidBodyComponent),
             typeof(AABBComponent),
+            typeof(Collider),
             typeof(CollisionComponent),
             typeof(MeshInstanceRenderer)
         );
@@ -43,11 +45,23 @@ public sealed class ArchetypeFactory
             typeof(Rotation),
             typeof(Block),
             typeof(AABBComponent),
+            typeof(Collider),
             typeof(CollisionComponent),
             typeof(MeshInstanceRenderer)
         );
-
         this.archetypes.Add("block", blockArchetype);
+
+        var brackeableArchetype = this._entityManager.CreateArchetype(
+            typeof(Position),
+            typeof(Rotation),
+            typeof(Block),
+            typeof(BreakComponent),
+            typeof(AABBComponent),
+            typeof(Collider),
+            typeof(CollisionComponent),
+            typeof(MeshInstanceRenderer)
+        );
+        this.archetypes.Add("breakeable", brackeableArchetype);
 
         var scoreArchetype = this._entityManager.CreateArchetype(
             typeof(Points),

@@ -23,6 +23,29 @@ public class BroadphaseSystem : ComponentSystem
     {
     }
 
+    private float3 getCollisionDirection(AABBComponent a, AABBComponent b)
+    {
+        float3 direction = float3.zero;
+
+        if (a.center.y > b.center.y)
+        {
+            return new float3(0, -1, 0);
+        }
+        else if (a.center.y < b.center.y)
+        {
+            return new float3(0, 1, 0);
+        }
+        else if (a.center.x > b.center.x)
+        {
+            return new float3(-1, 0, 0);
+        }
+        else if (a.center.x < b.center.x)
+        {
+            return new float3(1, 0, 0);
+        }
+
+        return direction;
+    }
     private bool checkAABB(AABBComponent a, AABBComponent b)
     {
         bool x = Mathf.Abs(a.center[0] - b.center[0]) <= (a.halfwidths[0] + b.halfwidths[0]);
@@ -39,18 +62,22 @@ public class BroadphaseSystem : ComponentSystem
         {
             m_Data.Collision[index] = new CollisionComponent
             {
-                Value = 0
+                direction = float3.zero
             };
+
             for (int id = 0; id < m_Data.Length; ++id)
             {
                 if (index == id)
                     continue;
+                AABBComponent a = m_Data.AABB[index];
+                AABBComponent b = m_Data.AABB[id];
 
-                if (checkAABB(m_Data.AABB[index], m_Data.AABB[id]))
+                if (checkAABB(a, b))
                 {
+
                     m_Data.Collision[index] = new CollisionComponent
                     {
-                        Value = 1
+                        direction = getCollisionDirection(a, b)
                     };
                 }
             }

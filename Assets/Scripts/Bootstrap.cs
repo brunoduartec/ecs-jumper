@@ -34,15 +34,16 @@ public class Bootstrap : MonoBehaviour
             constants.minY,
             constants.maxY,
             constants.distanceHeightBetweenRows,
+            3,
             constants.blocksTogether,
             constants.blockSize);
 
-        List<float3> level = generator.buildBlocks();
+        List<LevelGenerator.Item> items = generator.buildItems();
 
-        foreach (var blockPosition in level)
+        foreach (var item in items)
         {
-            Entity block = EntityFactory.Instance.createEntityByName("block");
-            entityManager.SetComponentData(block, new Position { Value = blockPosition });
+            Entity block = EntityFactory.Instance.createEntityByName(item.itemProperty.entityName);
+            entityManager.SetComponentData(block, new Position { Value = item.position });
         }
 
 

@@ -29,7 +29,8 @@ public class PlayerInputSystem : ComponentSystem
 
         m_Data.PlayerInput[i] = new PlayerInput
         {
-            Direction = xDirection
+            Direction = xDirection,
+            Intensity = m_Data.PlayerInput[i].Intensity
         };
     }
 }

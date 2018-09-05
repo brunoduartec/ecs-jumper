@@ -5,6 +5,26 @@
 -out:C:/Projects/Unity/ecs-jumper/Temp/Assembly-CSharp.dll
 -nostdlib
 -unsafe
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Properties.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.Codegen.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Jobs.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Jobs.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Collections.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Burst.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Mathematics.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Transforms.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Burst.Editor.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.TextMeshPro.dll
+-r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/UnityEngine/UnityEngine.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/UnityEngine/UnityEngine.AIModule.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/UnityEngine/UnityEngine.ARModule.dll"
@@ -66,26 +86,6 @@
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/UnityEngine/UnityEngine.XRModule.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/UnityEditor.dll"
 -r:"C:\Program Files\Unity\Hub\Editor\2018.2.6f1\Editor\Data\Managed/Unity.Locator.dll"
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Properties.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.Codegen.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Jobs.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Jobs.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Collections.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Burst.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Rendering.Hybrid.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Properties.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.Hybrid.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Mathematics.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Entities.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Transforms.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Burst.Editor.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.TextMeshPro.dll
--r:C:/Projects/Unity/ecs-jumper/Library/ScriptAssemblies/Unity.Transforms.Hybrid.dll
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.6f1/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.6f1/Editor/Data/UnityExtensions/Unity/Timeline/RuntimeEditor/UnityEngine.Timeline.dll"
 -r:"C:/Program Files/Unity/Hub/Editor/2018.2.6f1/Editor/Data/UnityExtensions/Unity/Networking/UnityEngine.Networking.dll"
@@ -306,22 +306,24 @@
 -d:UNITY_TEAM_LICENSE
 -d:UNITY_HAS_GOOGLEVR
 -d:UNITY_HAS_TANGO
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/ArchetypeFactory.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/AutoJumpSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Bootstrap.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/BroadphaseSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/ChangeDirectionSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/CheckBourdariesSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Components.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/ComputeColliderAABBSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/CreateBlocksSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/EntityFactory.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/FollowPlayerSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Configs/LevelGeneratorConfig.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Factories/ArchetypeFactory.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Factories/EntityFactory.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/GameConstants.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/GameOverSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/LevelGenerator.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/PlayerInputSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/RigidBodySystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/UpdateHudSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/UpdateScoreSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/AutoJumpSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/BreakeItemSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/BroadphaseSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ChangeDirectionSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/CheckBourdariesSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ComputeColliderAABBSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/CreateBlocksSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/FollowPlayerSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/GameOverSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/PlayerInputSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/RigidBodySystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateHudSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateScoreSystem.cs
 -v:0

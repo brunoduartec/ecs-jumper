@@ -8,13 +8,23 @@ using System.Collections.Generic;
 
 using Unity.Transforms;
 
+public struct Jump : IComponentData
+{
+    public float Value;
+}
 public struct Player : IComponentData { }
 public struct Block : IComponentData { }
+public struct BreakComponent : IComponentData
+{
+    public float coolDown;
+    public float started;
+}
 
 public struct PlayerInput : IComponentData
 {
     public float FireCooldown;
     public float Direction;
+    public float Intensity;
 }
 public struct Velocity : IComponentData
 {
@@ -32,11 +42,14 @@ public struct AABBComponent : IComponentData
     public float3 halfwidths;
 }
 
-public struct Collider : IComponentData { }
+public struct Collider : IComponentData
+{
+    public float size;
+}
 
 public struct CollisionComponent : IComponentData
 {
-    public float Value;
+    public float3 direction;
 }
 
 

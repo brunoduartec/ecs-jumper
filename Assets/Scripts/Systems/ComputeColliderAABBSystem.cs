@@ -14,6 +14,7 @@ public class ComputeColliderAABBSystem : JobComponentSystem
     {
         public readonly int Length;
         public ComponentDataArray<Position> Position;
+        public ComponentDataArray<Collider> Collider;
         public ComponentDataArray<AABBComponent> AABB;
     }
 
@@ -25,7 +26,7 @@ public class ComputeColliderAABBSystem : JobComponentSystem
         public void Execute(int index)
         {
             var position = data.Position[index].Value;
-            float size = 2.5f;
+            float size = data.Collider[index].size;
 
             AABBComponent aabb = new AABBComponent
             {
