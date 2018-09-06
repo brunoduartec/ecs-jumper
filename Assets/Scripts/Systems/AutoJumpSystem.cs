@@ -23,19 +23,9 @@ public class AutoJumpSystem : JobComponentSystem
 
     [Inject] private Data m_Data;
 
-    public struct ScoreData
-    {
-        public readonly int Length;
-        public ComponentDataArray<MaxHeight> MaxHeight;
-    }
-
-    [Inject] private ScoreData m_Score;
-
     public struct Job : IJobParallelFor
     {
         public Data data;
-        public ScoreData score;
-
         public void Execute(int index)
         {
             if (data.Velocity[index].Value.y < 0)
@@ -56,7 +46,6 @@ public class AutoJumpSystem : JobComponentSystem
         Job job = new Job()
         {
             data = m_Data,
-            score = m_Score
         };
         return job.Schedule(m_Data.Length, 64, inputDeps);
     }
