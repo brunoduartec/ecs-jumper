@@ -311,6 +311,7 @@
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Configs/LevelGeneratorConfig.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Factories/ArchetypeFactory.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Factories/EntityFactory.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Factories/EntityLookFactory.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/GameConstants.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/LevelGenerator.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/AutoJumpSystem.cs
@@ -319,12 +320,12 @@
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ChangeDirectionSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/CheckBourdariesSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ComputeColliderAABBSystem.cs
--i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/CreateBlocksSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/FollowPlayerSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/GameOverSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/PlayerInputSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/RigidBodySystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateHudSystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateLevelSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateScoreSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/ZigZagSystem.cs
 -v:0
