@@ -13,7 +13,7 @@ public struct Jump : IComponentData
     public float Value;
 }
 public struct Player : IComponentData { }
-public struct Block : IComponentData { }
+public struct Item : IComponentData { }
 public struct BreakComponent : IComponentData
 {
     public float coolDown;
