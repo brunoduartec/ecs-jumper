@@ -11,7 +11,13 @@ using UnityEngine;
 public sealed class EntityFactory
 {
     private static readonly EntityFactory instance = new EntityFactory();
-
+    public static EntityFactory Instance
+    {
+        get
+        {
+            return instance;
+        }
+    }
 
     private EntityManager _entityManager;
     private GameConstants _constants;
@@ -42,9 +48,10 @@ public sealed class EntityFactory
     {
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
 
-        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("player"));
+        string entityName = "player";
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
 
-        MeshInstanceRenderer renderer = GetLookFromPrototype("PlayerRenderPrototype");
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
         this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
         this._entityManager.SetSharedComponentData(entity, renderer);
 
@@ -67,7 +74,8 @@ public sealed class EntityFactory
     {
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
 
-        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("breakeable"));
+        string entityName = "breakeable";
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
 
         this._entityManager.SetComponentData(entity, new BreakComponent
         {
@@ -75,7 +83,7 @@ public sealed class EntityFactory
             started = 0
         });
 
-        MeshInstanceRenderer renderer = GetLookFromPrototype("BreakeableRenderPrototype");
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
         this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
         this._entityManager.SetSharedComponentData(entity, renderer);
 
@@ -85,8 +93,9 @@ public sealed class EntityFactory
     private Entity CreateZigZag()
     {
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
+        string entityName = "zigzag";
 
-        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("zigzag"));
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
 
         this._entityManager.SetComponentData(entity, new ZigZagMoveable
         {
@@ -96,7 +105,7 @@ public sealed class EntityFactory
             Direction = 1
         });
 
-        MeshInstanceRenderer renderer = GetLookFromPrototype("ZigZagRenderPrototype");
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
         this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
         this._entityManager.SetSharedComponentData(entity, renderer);
 
@@ -105,10 +114,11 @@ public sealed class EntityFactory
     private Entity CreateBlock()
     {
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
+        string entityName = "block";
 
-        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("block"));
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
 
-        MeshInstanceRenderer renderer = GetLookFromPrototype("SolidRenderPrototype");
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
         this._entityManager.SetComponentData(entity, getColliderInfo(renderer));
         this._entityManager.SetSharedComponentData(entity, renderer);
 
@@ -124,13 +134,6 @@ public sealed class EntityFactory
         return scoreEntity;
     }
 
-    public static EntityFactory Instance
-    {
-        get
-        {
-            return instance;
-        }
-    }
     public Entity createEntityByName(string entityName)
     {
         return (Entity)entities[entityName].DynamicInvoke(null);
@@ -144,13 +147,4 @@ public sealed class EntityFactory
         };
         return collider;
     }
-    private static MeshInstanceRenderer GetLookFromPrototype(string protoName)
-    {
-        var proto = GameObject.Find(protoName);
-        var result = proto.GetComponent<MeshInstanceRendererComponent>().Value;
-        Object.Destroy(proto);
-        return result;
-    }
-
-
 }
