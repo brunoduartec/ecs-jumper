@@ -18,17 +18,11 @@ public class Bootstrap : MonoBehaviour
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterSceneLoad)]
     void Start()
     {
+        EntityLookFactory.Instance.Init();
+
         GameObject GameConstantsObject = GameObject.Find("GameConstants");
         GameConstants constants = GameConstantsObject.GetComponent<GameConstants>();
-
-        var entityManager = World.Active.GetOrCreateManager<EntityManager>();
-
-        World.Active.GetOrCreateManager<UpdateHudSystem>().SetupGameObjects();
-
-        Entity player = EntityFactory.Instance.createEntityByName("player");
-        entityManager.SetComponentData(player, new Position { Value = new float3(0, constants.minY + constants.blockSize * 2, 0.0f) });
-
-        LevelGenerator generator = new LevelGenerator(
+        LevelGenerator.Instance.Init(
             constants.minX,
             constants.maxX,
             constants.minY,
@@ -38,7 +32,14 @@ public class Bootstrap : MonoBehaviour
             constants.blocksTogether,
             constants.blockSize);
 
-        List<LevelGenerator.Item> items = generator.buildItems();
+        List<LevelGenerator.Item> items = LevelGenerator.Instance.buildItems();
+        var entityManager = World.Active.GetOrCreateManager<EntityManager>();
+
+        World.Active.GetOrCreateManager<UpdateHudSystem>().SetupGameObjects();
+
+        Entity player = EntityFactory.Instance.createEntityByName("player");
+        entityManager.SetComponentData(player, new Position { Value = new float3(0, constants.minY + constants.blockSize * 2, 0.0f) });
+
 
         foreach (var item in items)
         {
