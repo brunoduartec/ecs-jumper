@@ -37,13 +37,13 @@ public sealed class ArchetypeFactory
             typeof(CollisionComponent),
             typeof(MeshInstanceRenderer)
         );
-
         this.archetypes.Add("player", playerArchetype);
+
 
         var blockArchetype = this._entityManager.CreateArchetype(
             typeof(Position),
             typeof(Rotation),
-            typeof(Block),
+            typeof(Item),
             typeof(AABBComponent),
             typeof(Collider),
             typeof(CollisionComponent),
@@ -53,7 +53,7 @@ public sealed class ArchetypeFactory
 
         var brackeableArchetype = this._entityManager.CreateArchetype(
             typeof(Position),
-            typeof(Block),
+            typeof(Item),
             typeof(BreakComponent),
             typeof(AABBComponent),
             typeof(Collider),
@@ -64,7 +64,7 @@ public sealed class ArchetypeFactory
 
         var zigzagArchetype = this._entityManager.CreateArchetype(
             typeof(Position),
-            typeof(Block),
+            typeof(Item),
             typeof(ZigZagMoveable),
             typeof(AABBComponent),
             typeof(Collider),
