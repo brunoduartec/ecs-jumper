@@ -8,6 +8,8 @@ public class GameConstants : MonoBehaviour
     public int maxX;
     public int minY;
     public int maxY;
+
+    public int maxRows;
     public int blockSize;
     public int blocksTogether;
     public int distanceHeightBetweenRows;
@@ -17,10 +19,8 @@ public class GameConstants : MonoBehaviour
     public float heightToRespawn;
 
     public float breakTimeInSeconds;
-
     public int gravity;
 
     public int MoveableBlockAmplitude;
     public int MoveableBlockSpeed;
-
 }
