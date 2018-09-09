@@ -68,6 +68,9 @@ public sealed class LevelGenerator
 
         int currentX = minX;
 
+        int distance = UnityEngine.Random.Range(2, this.maxDistanceBetweenRows);
+        LevelGenerator.MaxYPlaced += (distance * size);
+
         int itemsPlaced = 0;
 
         while (currentX < maxX && itemsPlaced < this.maxItemsByColumn)
@@ -99,18 +102,8 @@ public sealed class LevelGenerator
     {
         List<Item> items = new List<Item>();
 
-        int currentY = minY;
-
-        while (currentY < maxY)
+        while (LevelGenerator.MaxYPlaced < maxY)
         {
-            int distance = UnityEngine.Random.Range(2, this.maxDistanceBetweenRows);
-            currentY += (distance * size);
-
-            if (currentY > LevelGenerator.MaxYPlaced)
-            {
-                LevelGenerator.MaxYPlaced = currentY;
-            }
-
             items.AddRange(buildValidRow());
         }
         return items;
