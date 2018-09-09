@@ -36,13 +36,14 @@ public sealed class EntityFactory
         GameObject GameConstantsObject = GameObject.Find("GameConstants");
         this._constants = GameConstantsObject.GetComponent<GameConstants>();
 
-
         this.entities.Add("player", new Delegate1(CreatePlayer));
         this.entities.Add("block", new Delegate1(CreateBlock));
         this.entities.Add("breakeable", new Delegate1(CreateBreakeable));
         this.entities.Add("score", new Delegate1(CreateScore));
         this.entities.Add("zigzag", new Delegate1(CreateZigZag));
+        this.entities.Add("level", new Delegate1(CreateLevel));
     }
+
 
     private Entity CreatePlayer()
     {
@@ -133,6 +134,16 @@ public sealed class EntityFactory
 
         return scoreEntity;
     }
+
+    private Entity CreateLevel()
+    {
+        this._entityManager = World.Active.GetExistingManager<EntityManager>();
+
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("level"));
+
+        return entity;
+    }
+
 
     public Entity createEntityByName(string entityName)
     {
