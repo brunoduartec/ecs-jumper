@@ -78,6 +78,12 @@ public sealed class ArchetypeFactory
             typeof(MaxHeight)
         );
         this.archetypes.Add("score", scoreArchetype);
+
+
+        var levelArchetype = this._entityManager.CreateArchetype(
+            typeof(LevelState)
+        );
+        this.archetypes.Add("level", levelArchetype);
     }
 
     public static ArchetypeFactory Instance
