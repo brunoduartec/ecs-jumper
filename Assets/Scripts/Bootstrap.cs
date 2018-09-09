@@ -32,7 +32,6 @@ public class Bootstrap : MonoBehaviour
             constants.blocksTogether,
             constants.blockSize);
 
-        List<LevelGenerator.Item> items = LevelGenerator.Instance.buildItems();
         var entityManager = World.Active.GetOrCreateManager<EntityManager>();
 
         World.Active.GetOrCreateManager<UpdateHudSystem>().SetupGameObjects();
@@ -40,14 +39,7 @@ public class Bootstrap : MonoBehaviour
         Entity player = EntityFactory.Instance.createEntityByName("player");
         entityManager.SetComponentData(player, new Position { Value = new float3(0, constants.minY + constants.blockSize * 2, 0.0f) });
 
-
-        foreach (var item in items)
-        {
-            Entity block = EntityFactory.Instance.createEntityByName(item.itemProperty.entityName);
-            entityManager.SetComponentData(block, new Position { Value = item.position });
-        }
-
-
+        // creating the floor
         for (int i = constants.minX; i < constants.maxX; i += constants.blockSize)
         {
             Entity block = EntityFactory.Instance.createEntityByName("block");
@@ -59,6 +51,13 @@ public class Bootstrap : MonoBehaviour
         entityManager.SetComponentData(score, new Points { Value = 0 });
         entityManager.SetComponentData(score, new MaxHeight { Value = 0 });
 
+        Entity level = EntityFactory.Instance.createEntityByName("level");
+        entityManager.SetComponentData(level, new LevelState
+        {
+            currentRow = 0,
+            higherRow = constants.maxRows,
+            isDirty = 0
+        });
 
     }
 
