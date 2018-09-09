@@ -638,6 +638,7 @@ MonoBehaviour:
   maxX: 25
   minY: 0
   maxY: 150
+  maxRows: 10
   blockSize: 6
   blocksTogether: 2
   distanceHeightBetweenRows: 4

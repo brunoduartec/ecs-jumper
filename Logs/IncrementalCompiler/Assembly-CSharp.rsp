@@ -324,6 +324,7 @@
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/GameOverSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/PlayerInputSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/RigidBodySystem.cs
+-i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/SpawnItemsSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateHudSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateLevelSystem.cs
 -i:C:/Projects/Unity/ecs-jumper/Assets/Scripts/Systems/UpdateScoreSystem.cs
