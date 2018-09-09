@@ -12,15 +12,13 @@ using Unity.Jobs;
 
 using Unity.Mathematics;
 
-
-[UpdateAfter(typeof(ComputeColliderAABBSystem))]
 public class UpdateLevelSystem : ComponentSystem
 {
     public struct PlayerData
     {
         public readonly int Length;
-        public ComponentDataArray<Player> Player;
-        public ComponentDataArray<Position> Position;
+        [ReadOnly] public ComponentDataArray<Player> Player;
+        [ReadOnly] public ComponentDataArray<Position> Position;
     }
 
     [Inject] private PlayerData m_PlayerData;
@@ -32,8 +30,15 @@ public class UpdateLevelSystem : ComponentSystem
         public ComponentDataArray<Item> Item;
         public ComponentDataArray<Position> Position;
     }
-
     [Inject] private ItemData m_ItemData;
+
+    public struct LevelData
+    {
+        public readonly int Length;
+        public ComponentDataArray<LevelState> LevelState;
+    }
+
+    [Inject] private LevelData m_LevelData;
 
     protected override void OnUpdate()
     {
@@ -43,13 +48,16 @@ public class UpdateLevelSystem : ComponentSystem
             {
                 PostUpdateCommands.DestroyEntity(m_ItemData.Entities[index]);
 
-                List<LevelGenerator.Item> items = LevelGenerator.Instance.buildValidRow();
-                foreach (var item in items)
+                LevelState state = m_LevelData.LevelState[0];
+
+                if (state.isDirty == 0 && state.currentRow > 0)
                 {
-                    PostUpdateCommands.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(item.itemProperty.entityName));
-                    PostUpdateCommands.SetComponent(new Position { Value = item.position });
-                    PostUpdateCommands.SetComponent(default(Item));
-                    PostUpdateCommands.AddSharedComponent(EntityLookFactory.Instance.getLook(item.itemProperty.entityName));
+                    m_LevelData.LevelState[0] = new LevelState
+                    {
+                        currentRow = state.currentRow - 1,
+                        isDirty = 1,
+                        higherRow = state.higherRow
+                    };
                 }
             }
         }
