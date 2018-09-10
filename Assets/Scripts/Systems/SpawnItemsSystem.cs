@@ -22,14 +22,83 @@ public class SpawnItemsSystem : ComponentSystem
 
     [Inject] private LevelData m_LevelData;
 
+    private void SetItemBaseComponent(LevelGenerator.Item item)
+    {
+        PostUpdateCommands.SetComponent(new Position { Value = item.position });
+        PostUpdateCommands.SetComponent(default(Item));
+    }
+
+    private void createBlock()
+    {
+        string entityName = "block";
+
+        PostUpdateCommands.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
+
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
+        PostUpdateCommands.SetComponent(EntityFactory.getColliderInfo(renderer));
+        PostUpdateCommands.SetSharedComponent(renderer);
+    }
+    private void createBreakeable()
+    {
+        GameObject GameConstantsObject = GameObject.Find("GameConstants");
+        GameConstants _constants = GameConstantsObject.GetComponent<GameConstants>();
+
+        string entityName = "breakeable";
+        PostUpdateCommands.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
+
+        PostUpdateCommands.SetComponent(new BreakComponent
+        {
+            coolDown = _constants.breakTimeInSeconds,
+            started = 0
+        });
+
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
+        PostUpdateCommands.SetComponent(EntityFactory.getColliderInfo(renderer));
+        PostUpdateCommands.SetSharedComponent(renderer);
+    }
+
+    private void createZigZag()
+    {
+        GameObject GameConstantsObject = GameObject.Find("GameConstants");
+        GameConstants _constants = GameConstantsObject.GetComponent<GameConstants>();
+
+        string entityName = "zigzag";
+
+        PostUpdateCommands.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(entityName));
+
+        PostUpdateCommands.SetComponent(new ZigZagMoveable
+        {
+            Amplitude = _constants.MoveableBlockAmplitude * _constants.blockSize,
+            Speed = _constants.MoveableBlockSpeed,
+            CurrentPosition = 0,
+            Direction = 1
+        });
+
+        MeshInstanceRenderer renderer = EntityLookFactory.Instance.getLook(entityName);
+        PostUpdateCommands.SetComponent(EntityFactory.getColliderInfo(renderer));
+        PostUpdateCommands.SetSharedComponent(renderer);
+    }
+
 
     private void createEntity(LevelGenerator.Item item)
     {
-        PostUpdateCommands.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName(item.itemProperty.entityName));
-        PostUpdateCommands.SetComponent(new Position { Value = item.position });
-        PostUpdateCommands.SetComponent(default(Item));
+        switch (item.itemProperty.entityName)
+        {
+            case "block":
+                createBlock();
+                break;
+            case "breakeable":
+                createBreakeable();
+                break;
+            case "zigzag":
+                createZigZag();
+                break;
+            default:
+                createBlock();
+                break;
+        }
 
-        PostUpdateCommands.SetSharedComponent(EntityLookFactory.Instance.getLook("block"));
+        SetItemBaseComponent(item);
     }
 
 

@@ -150,7 +150,7 @@ public sealed class EntityFactory
         return (Entity)entities[entityName].DynamicInvoke(null);
     }
 
-    private static Collider getColliderInfo(MeshInstanceRenderer renderer)
+    public static Collider getColliderInfo(MeshInstanceRenderer renderer)
     {
         Collider collider = new Collider
         {
