@@ -45,7 +45,6 @@ public class UpdateScoreSystem : ComponentSystem
                     Value = m_PlayerData.Position[index].Value.y
                 };
             }
-
         }
     }
 }

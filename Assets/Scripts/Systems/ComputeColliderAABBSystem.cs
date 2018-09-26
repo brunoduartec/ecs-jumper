@@ -4,6 +4,7 @@ using Unity.Entities;
 using Unity.Transforms;
 
 using Unity.Jobs;
+using Unity.Burst;
 
 using Unity.Mathematics;
 
@@ -20,6 +21,7 @@ public class ComputeColliderAABBSystem : JobComponentSystem
 
     [Inject] private Data m_Data;
 
+    [BurstCompile]
     public struct Job : IJobParallelFor
     {
         public Data data;

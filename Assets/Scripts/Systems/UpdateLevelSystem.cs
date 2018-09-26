@@ -42,6 +42,9 @@ public class UpdateLevelSystem : ComponentSystem
 
     protected override void OnUpdate()
     {
+        if (m_ItemData.Length <= 0 || m_LevelData.Length <= 0)
+            return;
+
         for (int index = 0; index < m_ItemData.Length; ++index)
         {
             if (m_PlayerData.Position[0].Value.y - m_ItemData.Position[index].Value.y > 50)

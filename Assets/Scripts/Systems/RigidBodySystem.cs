@@ -15,8 +15,6 @@ public class RidigBodySystem : ComponentSystem
         public ComponentDataArray<Rotation> Rotation;
         public ComponentDataArray<CollisionComponent> Collision;
         public ComponentDataArray<RigidBodyComponent> RigidBody;
-
-
         public ComponentDataArray<Velocity> Velocity;
     }
 

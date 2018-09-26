@@ -3,18 +3,19 @@ using Unity.Collections;
 using Unity.Entities;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 
 [AlwaysUpdateSystem]
 public class UpdateHudSystem : ComponentSystem
 {
-    public struct PlayerData
+    public struct GameStateData
     {
         public readonly int Length;
-        [ReadOnly] public ComponentDataArray<Player> Player;
+        [ReadOnly] public ComponentDataArray<GameState> GameState;
     }
 
-    [Inject] PlayerData m_Players;
+    [Inject] GameStateData m_GameStateData;
 
 
     public struct ScoreData
@@ -25,16 +26,19 @@ public class UpdateHudSystem : ComponentSystem
 
     [Inject] ScoreData m_Score;
 
-    public Text ScoreText;
+    public Text scoreText;
+    public RectTransform popupTransform;
 
     public void SetupGameObjects()
     {
-        ScoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        scoreText = GameObject.Find("ScoreText").GetComponent<Text>();
+        popupTransform = GameObject.Find("Panel_PopUpWindow").GetComponent<RectTransform>();
+
     }
 
     protected override void OnUpdate()
     {
-        if (m_Players.Length > 0)
+        if (m_GameStateData.GameState[0].hasGameEnded <= 0)
         {
             UpdateAlive();
         }
@@ -46,11 +50,16 @@ public class UpdateHudSystem : ComponentSystem
 
     private void UpdateDead()
     {
+        // Move a transform to position 1,2,3 in 1 second
+        popupTransform.transform.DOMove(new Vector3(Screen.width / 2, Screen.height / 2, 0), 1);
+        // popupTransform.transform.position = Vector3.zero;
+
     }
 
     private void UpdateAlive()
     {
-        ScoreText.text = Mathf.Round(m_Score.MaxHeight[0].Value).ToString();
+        popupTransform.transform.position = new Vector3(Screen.width / 2, -Screen.height, 0);
+        scoreText.text = Mathf.Round(m_Score.MaxHeight[0].Value).ToString();
     }
 }
 
