@@ -81,9 +81,15 @@ public sealed class ArchetypeFactory
 
 
         var levelArchetype = this._entityManager.CreateArchetype(
-            typeof(LevelState)
+            typeof(LevelState),
+            typeof(LevelInfo)
         );
         this.archetypes.Add("level", levelArchetype);
+
+        var gameArchetype = this._entityManager.CreateArchetype(
+            typeof(GameState)
+        );
+        this.archetypes.Add("game", gameArchetype);
     }
 
     public static ArchetypeFactory Instance

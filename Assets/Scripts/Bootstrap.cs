@@ -28,7 +28,7 @@ public class Bootstrap : MonoBehaviour
             constants.minY,
             constants.maxY,
             constants.distanceHeightBetweenRows,
-            3,
+            constants.maxItemsByColumn,
             constants.blocksTogether,
             constants.blockSize);
 
@@ -58,6 +58,13 @@ public class Bootstrap : MonoBehaviour
             higherRow = constants.maxRows,
             isDirty = 0
         });
+
+        entityManager.SetComponentData(level, new LevelInfo
+        {
+            minY = constants.minY
+        });
+
+        Entity game = EntityFactory.Instance.createEntityByName("game");
 
     }
 

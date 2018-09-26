@@ -42,6 +42,7 @@ public sealed class EntityFactory
         this.entities.Add("score", new Delegate1(CreateScore));
         this.entities.Add("zigzag", new Delegate1(CreateZigZag));
         this.entities.Add("level", new Delegate1(CreateLevel));
+        this.entities.Add("game", new Delegate1(CreateGame));
     }
 
 
@@ -140,6 +141,21 @@ public sealed class EntityFactory
         this._entityManager = World.Active.GetExistingManager<EntityManager>();
 
         var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("level"));
+
+        return entity;
+    }
+
+    private Entity CreateGame()
+    {
+        this._entityManager = World.Active.GetExistingManager<EntityManager>();
+
+        var entity = this._entityManager.CreateEntity(ArchetypeFactory.Instance.getArchetypeByName("game"));
+
+        this._entityManager.SetComponentData(entity, new GameState
+        {
+            hasStarted = 0,
+            hasGameEnded = 0
+        });
 
         return entity;
     }

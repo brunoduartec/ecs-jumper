@@ -27,6 +27,18 @@ public struct LevelState : IComponentData
     public float isDirty;
 }
 
+public struct GameState : IComponentData
+{
+    public float hasStarted;
+    public float hasGameEnded;
+}
+
+public struct LevelInfo : IComponentData
+{
+    public float minY;
+
+}
+
 public struct BreakComponent : IComponentData
 {
     public float coolDown;

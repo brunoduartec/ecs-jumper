@@ -10,6 +10,7 @@ public class GameConstants : MonoBehaviour
     public int maxY;
 
     public int maxRows;
+    public int maxItemsByColumn;
     public int blockSize;
     public int blocksTogether;
     public int distanceHeightBetweenRows;
